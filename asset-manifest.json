@@ -1,0 +1,24 @@
+{
+  "files": {
+    "main.css": "/noche/static/css/main.a53ae5ad.chunk.css",
+    "main.js": "/noche/static/js/main.e704739d.chunk.js",
+    "main.js.map": "/noche/static/js/main.e704739d.chunk.js.map",
+    "runtime-main.js": "/noche/static/js/runtime-main.7960d1a3.js",
+    "runtime-main.js.map": "/noche/static/js/runtime-main.7960d1a3.js.map",
+    "static/css/2.f97446a8.chunk.css": "/noche/static/css/2.f97446a8.chunk.css",
+    "static/js/2.6e46968d.chunk.js": "/noche/static/js/2.6e46968d.chunk.js",
+    "static/js/2.6e46968d.chunk.js.map": "/noche/static/js/2.6e46968d.chunk.js.map",
+    "index.html": "/noche/index.html",
+    "static/css/2.f97446a8.chunk.css.map": "/noche/static/css/2.f97446a8.chunk.css.map",
+    "static/css/main.a53ae5ad.chunk.css.map": "/noche/static/css/main.a53ae5ad.chunk.css.map",
+    "static/js/2.6e46968d.chunk.js.LICENSE.txt": "/noche/static/js/2.6e46968d.chunk.js.LICENSE.txt",
+    "static/media/canal10.24a72002.png": "/noche/static/media/canal10.24a72002.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.7960d1a3.js",
+    "static/css/2.f97446a8.chunk.css",
+    "static/js/2.6e46968d.chunk.js",
+    "static/css/main.a53ae5ad.chunk.css",
+    "static/js/main.e704739d.chunk.js"
+  ]
+}
