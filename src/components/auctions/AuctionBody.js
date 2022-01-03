@@ -26,7 +26,7 @@ export const AuctionBody = () => {
   };
 
   let admin = currentUser ? currentUser.email : false;
-
+  let nop = '';
   let DBD;
   if (
     admin === "superadmin@gmail.com" ||
@@ -47,7 +47,7 @@ export const AuctionBody = () => {
     /* .sort((o1, o2) => o1.atendio === o2.atendio ? 0 : o2.atendio ? -1 : 1 ) ----sort por string */ 
   } else {
     DBD = [];
-    alert('usuario no permitido')
+    nop = 'Usuario No Permitido, No Podras Ver la Informacion'
   }
 
   /* ===================================== filter Date ==================== */
@@ -390,6 +390,8 @@ export const AuctionBody = () => {
           <button className="btn btn-primary " onClick={()=> setBool(!bool)}>
              {!bool ? 'Viajes Que Atendí' : 'Lista De Viajes Incompletos' }
           </button>
+
+          <p className="text-danger fs-1 bg-white text-center">{nop}</p>
 
           <div className="col-md-3 text-center d-none">
             <form onSubmit={handleSubmit}>
