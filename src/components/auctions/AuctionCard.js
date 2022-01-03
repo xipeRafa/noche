@@ -4,18 +4,17 @@ import { AuthContext } from "../../context/AuthContext";
 import { useFirestore } from "../../hooks/useFirestore";
 
 export const AuctionCard = ({ item, handleState}) => {
-  const { currentUser, bidAuction } = useContext(AuthContext);
+  const { currentUser,atender, bidAuction } = useContext(AuthContext);
 
   const { docs } = useFirestore("auctions");
 
   let seconds 
   let completed;
-  let acuerdo;
 
   docs.map((el) => {
     el.id === item.id && (seconds = el.duration);
     el.id === item.id && (completed = el.completed);
-    el.id === item.id && (acuerdo = el.acuerdo);
+    
   });
 
 
@@ -29,7 +28,7 @@ let date = new Date(seconds).toLocaleDateString("es-CL", {
 }); 
 
 const handlerButton =()=>{
-    bidAuction(item.id)
+    bidAuction(item.id, currentUser.email )
     handleState(item)
 }
 
@@ -37,6 +36,13 @@ const handlerInfo =()=>{
   handleState(item)
   window.scrollTo(0,document.body.scrollHeight, {behavior: 'smooth'})
 }
+
+const handlerAtender =()=>{
+  atender(item.id, currentUser.email )
+}
+
+
+
 
   return (
     <div className="col">
@@ -64,17 +70,24 @@ const handlerInfo =()=>{
             <p>{date}, {hora.slice(0, -3)}</p>
           </div>
           {/* <p className="card-text">{item?.description?.slice(0, 20)}...</p> */}
-
-
+          <p>Atendido Por: {item.atendio?.slice(0, -10)}</p>
+          
           <div className="d-flex justify-content-between align-item-center">
            
               <Button className={completed ? "btn btn-primary" 
-                                           : acuerdo 
-                                           ? "btn btn-success w-75" 
-                                           : "btn btn-danger w-75"}
-                      onClick={handlerButton}>
+                                           : item.monitor 
+                                           ? "btn btn-success " 
+                                           : "btn btn-danger "}
+                      onClick={handlerButton} 
+                      disabled={currentUser.email === item.atendio ? false : true } >
 
-                {completed ? "Completado" : acuerdo ? 'Sin Completar ✓' : 'Sin Completar ✘'}
+                {completed ? "Completado" : item.monitor ? 'Atendido ✓' : 'Sin completar ✘'}
+              </Button>
+
+              <Button className={item.atendio ? "d-none" : "btn btn-primary"}
+                      onClick={handlerAtender} >
+
+                 Atender
               </Button>
           
           </div>

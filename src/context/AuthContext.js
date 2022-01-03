@@ -21,12 +21,21 @@ export const AuthProvider = ({ children }) => {
     return authApp.signOut();
   };
 
-  const bidAuction = (auctionId) => {
+  const bidAuction = (auctionId, kl) => {
 
     const db = firestoreApp.collection('auctions');
 
     return db.doc(auctionId).update({
-      acuerdo:true
+      monitor:true,
+    });
+  };
+
+  const atender = (auctionId, kl) => {
+
+    const db = firestoreApp.collection('auctions');
+
+    return db.doc(auctionId).update({
+      atendio:kl,
     });
   };
 
@@ -67,6 +76,7 @@ export const AuthProvider = ({ children }) => {
         login,
         logout,
         bidAuction,
+        atender,
         noteContext,
         endAuction,
         globalMsg,

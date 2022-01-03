@@ -31,15 +31,20 @@ export const AuctionBody = () => {
   if (
     admin === "superadmin@gmail.com" ||
     admin === "test1@gmail.com" ||
-    admin === "superadmin3@gmail.com"
+    admin === "superadmin2@gmail.com" ||
+    admin === "superadmin3@gmail.com" ||
+
+    admin === "34@gmail.com" ||
+    admin === "124@gmail.com" ||
+    admin === "134@gmail.com" ||
+    admin === "14@gmail.com" 
   ) {
     DBD = DB
     .filter(el => el.categorie === 'oxxo') 
     .filter(el => el.completed === false)
     .sort((o1, o2) => o2.duration - o1.duration)
-    .slice(0, 20)
 
-          /* .sort((o1, o2) => o1.completed === o2.completed ? 0 : o2.completed ? -1 : 1 );*/
+    /* .sort((o1, o2) => o1.atendio === o2.atendio ? 0 : o2.atendio ? -1 : 1 ) ----sort por string */ 
   } else {
     DBD = [];
   }
@@ -310,10 +315,31 @@ export const AuctionBody = () => {
   
 
   if (arr.length > 0) {
-    arr4 = arr.sort((o1, o2) => o2.duration - o1.duration)
+
+    if (
+      admin === "superadmin@gmail.com" ||
+      admin === "test1@gmail.com" ||
+      admin === "superadmin2@gmail.com" ||
+      admin === "superadmin3@gmail.com" ||
+
+      admin === "34@gmail.com" ||
+      admin === "124@gmail.com" ||
+      admin === "134@gmail.com" ||
+      admin === "14@gmail.com" 
+    ) {
+
+      arr4 = arr.sort((o1, o2) => o2.duration - o1.duration)
               .filter(el => el?.categorie === 'oxxo')
               .filter(el => el.completed === false)
+
+    }else{
+      arr4 = []
+      alert('Usuario no permitido')
+    }
+    
   }
+
+  const [bool, setBool]=useState(true)
 
 
   return (
@@ -342,7 +368,7 @@ export const AuctionBody = () => {
           </div>
           <div className="col-1"></div>
           <div
-            className={n?.length > 0 ? "d-none" : "col-md-3 text-center"}
+            className={n?.length > 0 ? "d-none" : "col-md-3 text-center d-none"}
           >
             <DatePicker
               selected={fecha}
@@ -359,6 +385,10 @@ export const AuctionBody = () => {
           >
             🔙
           </div>
+
+          <button className="btn btn-primary " onClick={()=> setBool(!bool)}>
+             {!bool ? 'Viajes Que Atendí' : 'Lista De Viajes Incompletos' }
+          </button>
 
           <div className="col-md-3 text-center d-none">
             <form onSubmit={handleSubmit}>
@@ -561,10 +591,15 @@ export const AuctionBody = () => {
           </div>
         }
       </div>
+      
         </div>
       )}
 
+
+
       {currentUser && (
+
+        
         <div className="row row-cols-1 row-cols-md-3 row-cols-lg-4 py-4 px-3 g-3 
                         border mt-3 border border-secondary" 
                         style={{height:'500px', overflowY: 'scroll',}}>
@@ -572,17 +607,39 @@ export const AuctionBody = () => {
             <div className={arr.length > 0 ? "d-none" : "d-none"}>
               <Filters />
             </div>
+
+
+          {bool 
+            ?
+            arr4?.filter((el) => el !== undefined)
+                .filter(el => el.atendio === '')
+                ?.map((doc) => {
+                return (
+                  <AuctionCard
+                    item={doc}
+                    key={doc.id}
+                    handleState={handleState}
+                  />
+                );
+              })
+            : 
+            arr4?.filter((el) => el !== undefined)
+              .filter(el => el.atendio === currentUser.email)
+              .slice(0, 80)
+              ?.map((doc) => {
+                return (
+                  <AuctionCard
+                    item={doc}
+                    key={doc.id}
+                    handleState={handleState}
+                  />
+                );
+              })
+          }  
         
-          {arr4?.filter((el) => el !== undefined)
-            ?.map((doc) => {
-              return (
-                <AuctionCard
-                  item={doc}
-                  key={doc.id}
-                  handleState={handleState}
-                />
-              );
-            })}
+           
+
+         
         </div>
       )}
 
