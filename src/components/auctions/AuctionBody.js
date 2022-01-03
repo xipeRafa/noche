@@ -34,9 +34,10 @@ export const AuctionBody = () => {
     admin === "superadmin3@gmail.com"
   ) {
     DBD = DB
-          .filter(el => el.tiendaOxxo)  
-          .filter(el => el.completed === false)
-          .sort((o1, o2) => o2.duration - o1.duration)
+    .filter(el => el.categorie === 'oxxo') 
+    .filter(el => el.completed === false)
+    .sort((o1, o2) => o2.duration - o1.duration)
+    .slice(0, 20)
 
           /* .sort((o1, o2) => o1.completed === o2.completed ? 0 : o2.completed ? -1 : 1 );*/
   } else {
@@ -306,13 +307,12 @@ export const AuctionBody = () => {
   }
 
   let arr4 = DBD
-  .filter(el => el.tiendaOxxo) 
-  .filter(el => el.completed === false)
-  .sort((o1, o2) => o2.duration - o1.duration)
-  .slice(0, 20)
+  
 
   if (arr.length > 0) {
-    arr4 = arr.sort((o1, o2) => o2.duration - o1.duration).filter(el => el?.tiendaOxxo); 
+    arr4 = arr.sort((o1, o2) => o2.duration - o1.duration)
+              .filter(el => el?.categorie === 'oxxo')
+              .filter(el => el.completed === false)
   }
 
 
@@ -349,12 +349,12 @@ export const AuctionBody = () => {
               onChange={onDate}
               onFocus={dateFocus}
               locale="es"
-              className="pickers form-control w-100 bg-secondary"
+              className="pickers form-control w-100 mb-3 bg-secondary"
               dateFormat="dd 'de' MMMM 'de' yyyy"
             />
           </div>
           <div
-            className={arr?.length > 0 ? "col-md-1 fs-2 row-back mt-3" : "d-none"}
+            className={arr?.length > 0 ? "col-md-1 fs-2 row-back" : "d-none"}
             onClick={() => location.reload()}
           >
             🔙
