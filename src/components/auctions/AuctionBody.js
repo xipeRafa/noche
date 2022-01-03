@@ -47,6 +47,7 @@ export const AuctionBody = () => {
     /* .sort((o1, o2) => o1.atendio === o2.atendio ? 0 : o2.atendio ? -1 : 1 ) ----sort por string */ 
   } else {
     DBD = [];
+    alert('usuario no permitido')
   }
 
   /* ===================================== filter Date ==================== */
