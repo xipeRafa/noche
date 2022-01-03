@@ -63,16 +63,6 @@ const ItemSelected = ({
       </div>
 
       <div className="card pb-0" style={{backgroundColor:'rgb(230,230,230)'}}>
-        <div
-          style={{
-            height: "240px",
-            backgroundImage: `url(${itemState.imgUrl})`,
-            backgroundSize: "contain",
-            backgroundRepeat: "no-repeat",
-            backgroundPosition: "center"
-          }}
-          className="w-100 mb-4 mt-2"
-        />
 
         {title !== "Inicia sesión" && (
           <div className="card-body">
@@ -82,17 +72,14 @@ const ItemSelected = ({
               <h5>
                 <span className="text-secondary">KL: </span> {email.slice(0, -10)}
               </h5>
-              <h5>
+             {/*  <h5>
               <span className="text-secondary">Unidad: </span> {itemState.title}
-              </h5>
-              <h5>
-              <span className="text-secondary">Cliente: </span> {itemState.categorie}
-              </h5>
+              </h5> */}
             <h5>
-              <span className="text-secondary">Fecha: </span> {date}, {hora}
+              <span className="text-secondary">Oxxo: </span> {itemState.tiendaOxxo}
             </h5>
             <h5>
-              <span className="text-secondary">Tienda Oxxo: </span> {itemState.tiendaOxxo}
+              <span className="text-secondary">Fecha: </span> {date}, {hora}
             </h5>
             <h5 className="card-text">
               <span className="text-secondary">Comentarios: </span>{" "}

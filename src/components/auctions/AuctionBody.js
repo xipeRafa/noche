@@ -34,7 +34,7 @@ export const AuctionBody = () => {
     admin === "superadmin3@gmail.com"
   ) {
     DBD = DB
-          .filter(el => el.tiendaOxxo)
+          .filter(el => el.tiendaOxxo)  
           .filter(el => el.completed === false)
           .sort((o1, o2) => o2.duration - o1.duration)
 
@@ -207,7 +207,10 @@ export const AuctionBody = () => {
 
   let r = 60000 * f;
 
-  const t2 = DBD.filter((el) => el !== undefined).filter((el) => el.completed === false)
+  const t2 = DBD
+    .filter(el => el.tiendaOxxo)
+    .filter((el) => el !== undefined)
+    .filter((el) => el.completed === false)
 
   useEffect(() => {
 
@@ -303,12 +306,13 @@ export const AuctionBody = () => {
   }
 
   let arr4 = DBD
-  .filter(el => el.tiendaOxxo)
+  .filter(el => el.tiendaOxxo) 
   .filter(el => el.completed === false)
   .sort((o1, o2) => o2.duration - o1.duration)
+  .slice(0, 20)
 
   if (arr.length > 0) {
-    arr4 = arr.sort((o1, o2) => o2.duration - o1.duration).filter(el => el?.tiendaOxxo);
+    arr4 = arr.sort((o1, o2) => o2.duration - o1.duration).filter(el => el?.tiendaOxxo); 
   }
 
 
@@ -338,19 +342,19 @@ export const AuctionBody = () => {
           </div>
           <div className="col-1"></div>
           <div
-            className={n?.length > 0 ? "d-none" : "col-md-3 text-center mb-4 me-5"}
+            className={n?.length > 0 ? "d-none" : "col-md-3 text-center"}
           >
             <DatePicker
               selected={fecha}
               onChange={onDate}
               onFocus={dateFocus}
               locale="es"
-              className="pickers mb-3 form-control mt-2 w-100 bg-secondary"
+              className="pickers form-control w-100 bg-secondary"
               dateFormat="dd 'de' MMMM 'de' yyyy"
             />
           </div>
           <div
-            className={arr?.length > 0 ? "col-md-1 fs-2 row-back" : "d-none"}
+            className={arr?.length > 0 ? "col-md-1 fs-2 row-back mt-3" : "d-none"}
             onClick={() => location.reload()}
           >
             🔙
@@ -456,7 +460,7 @@ export const AuctionBody = () => {
 
       {/* =================================================================================================================================================================================================================================== */}
       {currentUser && (
-<div>
+<div className="d-none">
       <div className="d-flex flex-row justify-content-evenly p-4">
         <input
           type="button"
@@ -560,13 +564,15 @@ export const AuctionBody = () => {
         </div>
       )}
 
-      {DB && (
-        <div className="row row-cols-1 row-cols-md-3 row-cols-lg-4 py-4 px-5 g-3 border mt-1 ">
-          {currentUser && (
+      {currentUser && (
+        <div className="row row-cols-1 row-cols-md-3 row-cols-lg-4 py-4 px-3 g-3 
+                        border mt-3 border border-secondary" 
+                        style={{height:'500px', overflowY: 'scroll',}}>
+
             <div className={arr.length > 0 ? "d-none" : "d-none"}>
               <Filters />
             </div>
-          )}
+        
           {arr4?.filter((el) => el !== undefined)
             ?.map((doc) => {
               return (
@@ -580,8 +586,9 @@ export const AuctionBody = () => {
         </div>
       )}
 
-
+{currentUser && (
       <ItemSelected itemState={itemState} />
+      )}
     </div>
   );
 };

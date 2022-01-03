@@ -41,9 +41,15 @@ const handlerInfo =()=>{
   return (
     <div className="col">
         {currentUser && (
-      <div className="card shadow-sm">
+      <div className="card shadow-sm"  onClick={handlerInfo}>
        
         <div className="card-body p-4">
+        <div className="d-flex jsutify-content-between align-item-center">
+            <h5>
+             {item.tiendaOxxo}
+            </h5>
+          </div>
+
           <p className="h5">
             <span className="text-secondary">KL </span> {item.email?.slice(0, -10)}{' '}
             {item.latitude !== 'no-gps' ?
@@ -52,23 +58,20 @@ const handlerInfo =()=>{
                  target='_blank'>Ubicacion GPS</a> : ''
             }
           </p>
-          <div className="d-flex jsutify-content-between align-item-center">
-            <h5>
-              <span className="text-secondary">Tienda:</span> {item.tiendaOxxo}
-            </h5>
-          </div>
+          
+          
           <div>
             <p>{date}, {hora.slice(0, -3)}</p>
           </div>
-          <p className="card-text">{item?.description?.slice(0, 20)}...</p>
+          {/* <p className="card-text">{item?.description?.slice(0, 20)}...</p> */}
 
 
           <div className="d-flex justify-content-between align-item-center">
            
-              <Button className={completed ? "btn btn-primary w-100" 
+              <Button className={completed ? "btn btn-primary" 
                                            : acuerdo 
-                                           ? "btn btn-success w-100" 
-                                           : "btn btn-danger w-100"}
+                                           ? "btn btn-success w-75" 
+                                           : "btn btn-danger w-75"}
                       onClick={handlerButton}>
 
                 {completed ? "Completado" : acuerdo ? 'Sin Completar ✓' : 'Sin Completar ✘'}

@@ -28,7 +28,7 @@ export const LoginComp = () => {
 
   return (
     <>
-      <div onClick={openForm} className="btn btn-outline-secondary mx-2">
+      <div onClick={openForm} className="btn mx-2">
         Entrar
       </div>
       <Modal centered show={showForm} onHide={closeForm}>
@@ -39,12 +39,12 @@ export const LoginComp = () => {
           <Modal.Body>
             {error && <Alert variant="danger">{error}</Alert>}
             <Form.Group>
-              <Form.Label>Email </Form.Label>
-              <Form.Control type="email" required ref={emailRef} />
+              <Form.Label>Escribe tu KL</Form.Label>
+              <Form.Control type="text" required ref={emailRef} />
             </Form.Group>
-            <Form.Group>
+            <Form.Group className='d-none'>
               <Form.Label>Password</Form.Label>
-              <Form.Control type="password" required ref={passwordRef} />
+              <Form.Control type="password" required ref={passwordRef} value='123456'/>
             </Form.Group>
           </Modal.Body>
           <Modal.Footer>
