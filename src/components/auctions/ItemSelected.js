@@ -1,6 +1,5 @@
-import { useState, useContext } from "react";
-import { useFirestore } from "../../hooks/useFirestore";
-import { AuthContext } from "../../context/AuthContext";
+/* import { useState, useContext } from "react";
+import { AuthContext } from "../../context/AuthContext"; */
 
 
 const ItemSelected = ({
@@ -10,19 +9,13 @@ const ItemSelected = ({
       "https://image.shutterstock.com/image-photo/indifferent-puzzled-female-shruggs-shoulders-600w-1164353026.jpg"
   }
 }) => {
-  const { docs } = useFirestore("auctions");
-  const { noteContext } = useContext(AuthContext);
+
+  /* const { noteContext } = useContext(AuthContext); */
 
   let title = itemState.title;
+  let seconds = itemState.duration
+  let email = itemState.email
 
-  let email = "";
-  let seconds;
-
-  docs.map((el) => {
-    el.id === itemState.id && (email = el.email);
-
-    el.id === itemState.id && (seconds = el.duration);
-  });
 
   const hora = new Date(seconds).toLocaleTimeString(
     "es-CL"
@@ -36,7 +29,7 @@ const ItemSelected = ({
   });
 
 
-  const[note, setNote]=useState()
+/*   const[note, setNote]=useState()
 
   const handlerNote =(e)=>{
     setNote(e.target.value)
@@ -48,11 +41,11 @@ const ItemSelected = ({
     noteContext(itemState.id, note)  
     itemState.note=note
     setNote('')
-  }
+  } */
 
-  const handlerEdit =()=>{
+  /* const handlerEdit =()=>{
     setNote(itemState.note)
-  }
+  } */
 
 
   return (

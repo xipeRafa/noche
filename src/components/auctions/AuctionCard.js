@@ -1,22 +1,12 @@
 import React, { useContext } from "react";
 import { Button } from "react-bootstrap";
 import { AuthContext } from "../../context/AuthContext";
-import { useFirestore } from "../../hooks/useFirestore";
 
 export const AuctionCard = ({ item, handleState}) => {
-  const { currentUser,atender, bidAuction } = useContext(AuthContext);
+  const { currentUser, atender, bidAuction } = useContext(AuthContext);
 
-  const { docs } = useFirestore("auctions");
-
-  let seconds 
-  let completed;
-
-  docs.map((el) => {
-    el.id === item.id && (seconds = el.duration);
-    el.id === item.id && (completed = el.completed);
-    
-  });
-
+  let seconds = item.duration
+  let completed = item.completed
 
 const hora = new Date(seconds).toLocaleTimeString("es-CL")
 
@@ -40,8 +30,6 @@ const handlerInfo =()=>{
 const handlerAtender =()=>{
   atender(item.id, currentUser.email )
 }
-
-
 
 
   return (
