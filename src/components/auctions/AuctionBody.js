@@ -615,7 +615,7 @@ export const AuctionBody = () => {
                 );
               })
             : 
-            arr3?.filter((el) => el !== undefined)
+            arr4?.filter((el) => el !== undefined)
               .filter(el => el.completed === false)
               .filter(el => el.atendio === currentUser.email)
               .slice(0, 80)
