@@ -42,9 +42,9 @@ export const LoginComp = () => {
               <Form.Label>Escribe tu KL</Form.Label>
               <Form.Control type="text" required ref={emailRef} />
             </Form.Group>
-            <Form.Group className='d-none'>
+            <Form.Group className=''>
               <Form.Label>Password</Form.Label>
-              <Form.Control type="password" required ref={passwordRef} value='123456'/>
+              <Form.Control type="password" required ref={passwordRef} /* value='123456' *//>
             </Form.Group>
           </Modal.Body>
           <Modal.Footer>

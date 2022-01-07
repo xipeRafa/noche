@@ -162,8 +162,11 @@ export const AuctionBody = () => {
           </div>
           <div className="col-1"></div>
           <div
-            className={ admin !== "superadmin@gmail.com" 
-                        ? "d-none" : "col-md-3 text-center"}>
+            className={ admin === "superadmin@gmail.com" ||
+                        admin === "superadmin2@gmail.com" ||
+                        admin === "superadmin3@gmail.com"
+                        ? "col-md-3 text-center" : "d-none"}>
+
             <DatePicker
               selected={fecha}
               onChange={onDate}
@@ -179,8 +182,11 @@ export const AuctionBody = () => {
             🔙
           </div>
 
-          <button className={ admin === "superadmin@gmail.com" 
-                                ? "btn btn-primary d-none" : "btn btn-primary"}  
+          <button className={ admin === "superadmin@gmail.com" ||
+                              admin === "superadmin2@gmail.com" ||
+                              admin === "superadmin3@gmail.com" 
+                                ? "d-none" : "btn btn-primary"}  
+                                
 
                   onClick={()=> setBool(!bool)}>
 
