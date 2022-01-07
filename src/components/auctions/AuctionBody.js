@@ -41,6 +41,7 @@ export const AuctionBody = () => {
     DBD = DB
     .filter(el => el.categorie === 'oxxo') 
     .sort((o1, o2) => o2.duration - o1.duration)
+    .filter(el => el.completed === false)
 
     /* .sort((o1, o2) => o1.atendio === o2.atendio ? 0 : o2.atendio ? -1 : 1 ) ----sort por string */ 
   } else {
@@ -73,7 +74,7 @@ export const AuctionBody = () => {
 
     setToday2(today2);
 
-    let ss = DB;
+    let ss = DB.filter(el => el.categorie === 'oxxo');
 
     let a = ss.map((el, i) => {
       if (el.duration > today && el.duration < tomorrow) {
@@ -115,25 +116,7 @@ export const AuctionBody = () => {
 
   if (arr.length > 0) {
 
-    if (
-      admin === "superadmin@gmail.com" ||
-      admin === "test1@gmail.com" ||
-      admin === "superadmin2@gmail.com" ||
-      admin === "superadmin3@gmail.com" ||
-
-      admin === "34@gmail.com" ||
-      admin === "124@gmail.com" ||
-      admin === "134@gmail.com" ||
-      admin === "14@gmail.com" 
-    ) {
-
-      arr4 = arr.filter(el => el !== undefined).sort((o1, o2) => o2.duration - o1.duration)
-              .filter(el => el?.categorie === 'oxxo')
-
-    }else{
-      arr4 = []
-      console.log('Usuario no permitido')
-    }
+      arr4 = arr.filter(el => el !== undefined)
     
   }
 
@@ -226,14 +209,15 @@ export const AuctionBody = () => {
 
       {currentUser && (
 
-        <div className={admin === "superadmin@gmail.com" ? 'd-none' :
+        <div className={admin === "superadmin@gmail.com" ||
+                        admin === "superadmin2@gmail.com" || 
+                        admin === "superadmin3@gmail.com" ? 'd-none' :
          "row row-cols-1 row-cols-md-3 row-cols-lg-4 py-4 px-3 g-3 border mt-3 border border-secondary"}   
               style={{height:'500px', overflowY: 'scroll'}}>
 
           {bool 
             ?
             arr4?.filter((el) => el !== undefined)
-                .filter(el => el.completed === false)
                 .filter(el => el.atendio === '')
                 ?.map((doc) => {
                 return (
@@ -246,9 +230,8 @@ export const AuctionBody = () => {
               })
             : 
             arr4?.filter((el) => el !== undefined)
-              .filter(el => el.completed === false)
               .filter(el => el.atendio === currentUser.email)
-              .slice(0, 80)
+              .slice(0, 40)
               ?.map((doc) => {
                 return (
                   <AuctionCard
@@ -262,7 +245,9 @@ export const AuctionBody = () => {
         </div>
       )}
 
-            <div className={admin !== "superadmin@gmail.com" && 'd-none'}>
+            <div className={admin !== "superadmin@gmail.com" ||
+                            admin !== "superadmin2@gmail.com" || 
+                            admin !== "superadmin3@gmail.com" && 'd-none'}>
                 
                 {  
                       arr.filter(el => el !== undefined)
@@ -282,7 +267,9 @@ export const AuctionBody = () => {
             </div>
 
       {currentUser && (
-        <div className={admin === "superadmin@gmail.com" && 'd-none'}>
+        <div className={admin === "superadmin@gmail.com" || 
+                        admin === "superadmin2@gmail.com" ||
+                        admin === "superadmin3@gmail.com" ? 'd-none': 'border'}>
           <ItemSelected itemState={itemState} />
         </div>
       )}

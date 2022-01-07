@@ -5,9 +5,6 @@ const list = ({ el }) => {
       let color = el.tiendaOxxo.at(0)
       let colorl = el.tiendaOxxo.at(-1)
 
-      console.log(el)
-
-
   return (
     <div className={
       colorl === 'A' && 'c1' || colorl === 'B' && 'c2' || colorl === 'C' && 'c3' ||
@@ -49,8 +46,4 @@ const list = ({ el }) => {
 
 export default list;
 
-{
-  /* <div className={el.duration} key={el.duration}>
 
-</div> */
-}
