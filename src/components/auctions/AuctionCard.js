@@ -58,8 +58,10 @@ const handlerAtender =()=>{
             <p>{date}, {hora.slice(0, -3)}</p>
           </div>
           {/* <p className="card-text">{item?.description?.slice(0, 20)}...</p> */}
-          <p>Atendido Por: {item.atendio?.slice(0, -10)}</p>
-          
+
+          {item.atendio !== '' &&
+            <p>Atendido Por: {item.atendio?.slice(0, -10)}</p>
+          }
           <div className="d-flex justify-content-between align-item-center">
            
               <Button className={completed ? "btn btn-primary" 

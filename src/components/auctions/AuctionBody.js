@@ -40,7 +40,6 @@ export const AuctionBody = () => {
   ) {
     DBD = DB
     .filter(el => el.categorie === 'oxxo') 
-    .filter(el => el.completed === false)
     .sort((o1, o2) => o2.duration - o1.duration)
 
     /* .sort((o1, o2) => o1.atendio === o2.atendio ? 0 : o2.atendio ? -1 : 1 ) ----sort por string */ 
@@ -50,14 +49,14 @@ export const AuctionBody = () => {
   }
 
   /* ===================================== filter Date ==================== */
-  const dateFocus = () => {
-    setArr([]);
-  };
+
 
   const [today2, setToday2] = useState();
 
   const [fecha, setFecha] = useState();
   const [arr, setArr] = useState([]);
+
+  console.log(arr.filter(el => el !== undefined))
 
   let l = arr.filter((el) => el).length;
 
@@ -138,11 +137,8 @@ export const AuctionBody = () => {
 
   /* ===================================== Clientes Filter ==================== */
 
-  let db = n
-    ?.sort((o1, o2) => o1.duration - o2.duration) //last to near
-    .sort((o1, o2) =>
-      o1.completed === o2.completed ? 0 : o2.completed ? -1 : 1
-    );
+  let db = n?.sort((o1, o2) => o1.duration - o2.duration) //last to near
+    
 
   const [oxxo, setoxxo] = useState(true);
   const [otro, setotro] = useState(true);
@@ -216,7 +212,6 @@ export const AuctionBody = () => {
   const t2 = DBD
     .filter(el => el.tiendaOxxo)
     .filter((el) => el !== undefined)
-    .filter((el) => el.completed === false)
 
   useEffect(() => {
 
@@ -305,9 +300,6 @@ export const AuctionBody = () => {
     if (arr) {
       arr3 = arr
         .sort((o1, o2) => o1.duration - o2.duration) //last to near
-        .sort((o1, o2) =>
-          o1.completed === o2.completed ? 0 : o2.completed ? -1 : 1
-        );
     }
   }
 
@@ -328,19 +320,26 @@ export const AuctionBody = () => {
       admin === "14@gmail.com" 
     ) {
 
-      arr4 = arr.sort((o1, o2) => o2.duration - o1.duration)
+      arr4 = arr.filter(el => el !== undefined).sort((o1, o2) => o2.duration - o1.duration)
               .filter(el => el?.categorie === 'oxxo')
-              .filter(el => el.completed === false)
 
     }else{
       arr4 = []
-      console('Usuario no permitido')
+      console.log('Usuario no permitido')
     }
     
   }
 
   const [bool, setBool]=useState(true)
 
+  let personasMap22 = arr.map((item) => {
+    return [item?.tiendaOxxo, item];
+  });
+  let personasMapArr22 = new Map(personasMap22);
+
+  let unicos = [...personasMapArr22.values()]
+
+  console.log(unicos.filter(el => el !== undefined))
 
   return (
     <div className="container-fluid">
@@ -352,7 +351,7 @@ export const AuctionBody = () => {
               <span className="p-1">{l}</span> Viajes el Dia: {today2} 
             </span>
 
-            <span className={n?.length > 0 ? "mx-5" : "d-none"} >
+            <span className={n?.length > 0 ? "mx-5" : "d-none"}>
               <span className="bg-danger p-1">
                 {n?.filter((el) => el.completed === false).length}
               </span>{" "}
@@ -361,12 +360,11 @@ export const AuctionBody = () => {
           </div>
           <div className="col-1"></div>
           <div
-            className={n?.length > 0 ? "d-none" : "col-md-3 text-center d-none"}
-          >
+            className={ admin !== "superadmin@gmail.com" 
+                        ? "d-none" : "col-md-3 text-center"}>
             <DatePicker
               selected={fecha}
               onChange={onDate}
-              onFocus={dateFocus}
               locale="es"
               className="pickers form-control w-100 mb-3 bg-secondary"
               dateFormat="dd 'de' MMMM 'de' yyyy"
@@ -379,8 +377,12 @@ export const AuctionBody = () => {
             🔙
           </div>
 
-          <button className="btn btn-primary " onClick={()=> setBool(!bool)}>
-             {!bool ? 'Viajes Que Atendí' : 'Lista De Viajes Incompletos' }
+          <button className={ admin === "superadmin@gmail.com" 
+                                ? "btn btn-primary d-none" : "btn btn-primary"}  
+
+                  onClick={()=> setBool(!bool)}>
+
+              {!bool ? 'Viajes Que Atendí' : 'Lista De Viajes Incompletos' }
           </button>
 
           <p className="text-danger fs-1 bg-white text-center">{nop}</p>
@@ -594,14 +596,14 @@ export const AuctionBody = () => {
 
       {currentUser && (
 
-        
-        <div className="row row-cols-1 row-cols-md-3 row-cols-lg-4 py-4 px-3 g-3 
-                        border mt-3 border border-secondary" 
-                        style={{height:'500px', overflowY: 'scroll',}}>
+        <div className={admin === "superadmin@gmail.com" ? 'd-none' :
+         "row row-cols-1 row-cols-md-3 row-cols-lg-4 py-4 px-3 g-3 border mt-3 border border-secondary"}   
+              style={{height:'500px', overflowY: 'scroll'}}>
 
           {bool 
             ?
             arr4?.filter((el) => el !== undefined)
+                .filter(el => el.completed === false)
                 .filter(el => el.atendio === '')
                 ?.map((doc) => {
                 return (
@@ -613,7 +615,8 @@ export const AuctionBody = () => {
                 );
               })
             : 
-            arr4?.filter((el) => el !== undefined)
+            arr3?.filter((el) => el !== undefined)
+              .filter(el => el.completed === false)
               .filter(el => el.atendio === currentUser.email)
               .slice(0, 80)
               ?.map((doc) => {
@@ -626,12 +629,25 @@ export const AuctionBody = () => {
                 );
               })
           }  
-        
         </div>
       )}
 
+            <div className={admin !== "superadmin@gmail.com" && 'd-none'}>
+                {
+                   arr.filter((el) => el !== undefined)
+                   .map((el) => {
+                     return (
+                       <p>{el.tiendaOxxo} {el.completed ? '✓' : '✘'}</p>
+                     );
+                   })
+                }
+              
+            </div>
+
       {currentUser && (
-        <ItemSelected itemState={itemState} />
+        <div className={admin === "superadmin@gmail.com" && 'd-none'}>
+          <ItemSelected itemState={itemState} />
+        </div>
       )}
     </div>
   );

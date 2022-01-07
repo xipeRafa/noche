@@ -72,9 +72,6 @@ const ItemSelected = ({
               <span className="text-secondary">Oxxo: </span> {itemState.tiendaOxxo}
             </h5>
             <h5>
-              <span className="text-secondary">Atendio: </span> {itemState.atendio?.slice(0, -10)}
-            </h5>
-            <h5>
               <span className="text-secondary">Fecha: </span> {date}, {hora}
             </h5>
             <h5 className="card-text">
