@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useState } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import { AuctionCard } from "./AuctionCard";
 
@@ -147,20 +147,20 @@ export const AuctionBody = () => {
     <div className="container-fluid">
 
       {admin && (
-        <div className="row bg-secondary pt-4 pb-3">
-          <div className="text-white bg-primary mb-3 p-1 blue d-none">
+        <div className="row bg-secondary pt-4 pb-0">
+         {/*  <div className="text-white bg-primary blue d-none">
             <span style={{ marginLeft: "20px" }}>
               <span className="p-1">{l}</span> Viajes el Dia: {today2} 
             </span>
 
             <span className={n?.length > 0 ? "mx-5" : "d-none"}>
-              <span className="bg-danger p-1">
+              <span className="bg-danger">
                 {n?.filter((el) => el.completed === false).length}
               </span>{" "}
               Viajes Sin Completar de KL {mail}
             </span>
-          </div>
-          <div className="col-1"></div>
+          </div> */}
+          <div className="col-md-1"></div>
           <div
             className={ admin === "superadmin@gmail.com" ||
                         admin === "superadmin2@gmail.com" ||
@@ -171,7 +171,7 @@ export const AuctionBody = () => {
               selected={fecha}
               onChange={onDate}
               locale="es"
-              className="pickers form-control w-100 mb-3 bg-secondary"
+              className="pickers form-control w-100 bg-secondary"
               dateFormat="dd 'de' MMMM 'de' yyyy"
             />
           </div>

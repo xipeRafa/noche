@@ -6,8 +6,6 @@ export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [globalMsg, setGlobalMsg] = useState('');
 
   const register = (email, password) => {
     return authApp.createUserWithEmailAndPassword(email, password);
@@ -38,7 +36,7 @@ export const AuthProvider = ({ children }) => {
       atendio:kl,
     });
   };
-
+/* 
   const noteContext = (auctionId, note) => {
 
     const db = firestoreApp.collection('auctions');
@@ -46,7 +44,7 @@ export const AuthProvider = ({ children }) => {
     return db.doc(auctionId).update({
       note:note
     });
-  };
+  }; */
 
   const endAuction = (auctionId) => {
     const db = firestoreApp.collection('auctions');
@@ -77,12 +75,11 @@ export const AuthProvider = ({ children }) => {
         logout,
         bidAuction,
         atender,
-        noteContext,
-        endAuction,
-        globalMsg,
+       /*  noteContext, */
+        endAuction
       }}
     >
-      {!loading && children}
+      {children}
     </AuthContext.Provider>
   );
 };
