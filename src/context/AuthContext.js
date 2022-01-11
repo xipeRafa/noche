@@ -46,25 +46,15 @@ export const AuthProvider = ({ children }) => {
     });
   }; */
 
-  const endAuction = (auctionId) => {
-    const db = firestoreApp.collection('auctions');
-
-    return db.doc(auctionId).delete();
-  };
 
    useEffect(() => {
     const subscribe = authApp.onAuthStateChanged((user) => {
       setCurrentUser(user);
-      setLoading(false);
     });
 
     return subscribe;
   }, []); 
 
-  useEffect(() => {
-    const interval = setTimeout(() => setGlobalMsg(''), 5000);
-    return () => clearTimeout(interval);
-  }, [globalMsg]);
 
   return (
     <AuthContext.Provider
@@ -74,9 +64,7 @@ export const AuthProvider = ({ children }) => {
         login,
         logout,
         bidAuction,
-        atender,
-       /*  noteContext, */
-        endAuction
+        atender
       }}
     >
       {children}

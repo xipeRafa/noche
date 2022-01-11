@@ -17,11 +17,11 @@ export const NavComp = () => {
           <div className="col">
             {currentUser ? (
               <>
-                <div className="btn disabled">
+                <div className="btn">
                   {currentUser.email.slice(0, -10)}
                 </div>
                 <div onClick={() => logout()} className="btn">
-                  SALIR
+                  salir
                 </div>
               </>
             ) : (
