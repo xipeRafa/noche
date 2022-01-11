@@ -171,7 +171,7 @@ export const AuctionBody = () => {
               selected={fecha}
               onChange={onDate}
               locale="es"
-              className="pickers form-control w-100 bg-secondary"
+              className="pickers form-control mb-2 w-100 bg-secondary"
               dateFormat="dd 'de' MMMM 'de' yyyy"
             />
           </div>
