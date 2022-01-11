@@ -11,7 +11,7 @@ export const NavComp = () => {
     <nav className="container-fluid navbar bg-info">
       <div className="container-fluid">
         <div className="navbar-brand">
-          {/* <img src={logoImg} alt="logo" height="50" /> */} Incompletos De OXXO
+          {/* <img src={logoImg} alt="logo" height="50" /> */} OXXO
         </div>
         <div className="d-flex">
           <div className="col">
