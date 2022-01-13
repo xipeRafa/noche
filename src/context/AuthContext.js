@@ -5,6 +5,9 @@ export const AuthContext = createContext();
 
 
 export const AuthProvider = ({ children }) => {
+
+  let auctions = Date.parse(new Date().toDateString())+'si'
+  
   const [currentUser, setCurrentUser] = useState(null);
 
   const register = (email, password) => {
@@ -21,7 +24,7 @@ export const AuthProvider = ({ children }) => {
 
   const bidAuction = (auctionId, kl) => {
 
-    const db = firestoreApp.collection('auctions');
+    const db = firestoreApp.collection(auctions);
 
     return db.doc(auctionId).update({
       monitor:true,
@@ -30,7 +33,7 @@ export const AuthProvider = ({ children }) => {
 
   const atender = (auctionId, kl) => {
 
-    const db = firestoreApp.collection('auctions');
+    const db = firestoreApp.collection(auctions);
 
     return db.doc(auctionId).update({
       atendio:kl,

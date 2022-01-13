@@ -15,7 +15,9 @@ registerLocale("es", es);
 export const AuctionBody = () => {
   const { currentUser } = useContext(AuthContext);
 
-  const { docs } = useFirestore('auctions');
+  let auctions = Date.parse(new Date().toDateString())+'si'
+
+  const { docs } = useFirestore(auctions);
   let DB = docs
 
   const [itemState, setItemState] = useState();
